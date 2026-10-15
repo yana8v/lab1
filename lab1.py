@@ -1,5 +1,5 @@
-import time  # для задержки
-import os  # для очистки
+import time 
+import os  
 
 
 BLUE = '\u001b[44m'
@@ -26,9 +26,9 @@ def flag(k=2, background=WHITE, cross=BLUE):
             vertical = start_vert <= x < start_vert + cross_w
             horizontal = start_hor <= y < start_hor + cross_w
             if vertical or horizontal:
-                line = line + cross + pixel  # рисуем крест
+                line = line + cross + pixel 
             else:
-                line = line + background + pixel  # рисуем фон
+                line = line + background + pixel
         print(line + RESET) 
 
 
@@ -49,9 +49,9 @@ def circles(repeats=3):
             # проверяем, находится ли точка внутри второго круга
             in_circle2 = (x - center2_x)**2 + (y - center_y)**2 <= radius**2
             if in_circle1 or in_circle2:
-                line = line + BLACK + pixel  # если внутри круга — чёрный цвет
+                line = line + BLACK + pixel
             else:
-                line = line + WHITE + pixel  # иначе белый цвет
+                line = line + WHITE + pixel
         print((line + RESET) * repeats)
 
 
@@ -60,7 +60,7 @@ def animation():
     height = 11 * k  
     crosses = [BLUE, RED, GREEN, YELLOW]  
 
-    os.system('cls')  # очищаем консоль
+    os.system('cls')
     for cross in crosses:  # по очереди берём каждый цвет
         flag(k, WHITE, cross)  # рисуем флаг с выбранным цветом
         time.sleep(1)  
@@ -70,16 +70,15 @@ def animation():
 
 def sequence():
     file = open('sequence.txt', 'r') 
-    first = []  # список для положительных чисел
-    second = []  # список для отрицательных чисел
+    first = []  # +
+    second = []  # -
     for line in file:  # читаем файл построчно
-        number = float(line)  # превращаем строку в число
+        number = float(line)  # превращаем строку в число (дробное тоеж)
         if 5 <= number <= 10:
-            first.append(number)  # добавляем число в первую группу
+            first.append(number)
         elif -10 <= number <= -5:
-            second.append(number)  # добавляем число во вторую группу
+            second.append(number)
     file.close() 
-    # считаем проценты
     percent1 = len(first) / (len(first) + len(second)) * 100
     percent2 = 100 - percent1
 
